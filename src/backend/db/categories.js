@@ -5,23 +5,47 @@ import { v4 as uuid } from "uuid";
  * You can add category of your wish with different attributes
  * */
 
-export const categories = [
+ export const categories = [
   {
     _id: uuid(),
-    categoryName: "Computer Programming",
-    description:
-      "Computer programming is the process of designing and building an executable computer program to accomplish a specific computing",
+    categoryName: "Cakes",
+    categoryIdentity:"CAKES",
+    image:"assets/category-cake.jpg",
   },
   {
     _id: uuid(),
-    categoryName: "Frontend Development",
-    description:
-      "Front-end web development, also known as client-side development is the practice of producing HTML, CSS and JavaScript for a website or Web Application",
+    categoryName: "Pastries and Cupcakes",
+    categoryIdentity:"PASTRIES",
+    image:"assets/category-cupcakes.jpg"
   },
   {
     _id: uuid(),
-    categoryName: "Backend Development",
-    description:
-      "Backend Development is also known as server-side development. It is everything that the users don't see and contains behind-the-scenes activities that occur when performing any action on a website.",
+    categoryName: "Brownies and Dry Cakes",
+    categoryIdentity:"BROWNIES",
+    image: "assets/category-brownies.jpg"
   },
+  {
+    _id: uuid(),
+    categoryName: "Chocolates",
+    categoryIdentity:"CHOCOLATES",
+    image:"assets/category-chocolates.jpg"
+  },
+  {
+    _id: uuid(),
+    categoryName: "Cookies",
+    categoryIdentity:"COOKIES",
+    image: "assets/category-cookies.jpg"
+  },
+  {
+    _id: uuid(),
+    categoryName: "Donuts",
+    categoryIdentity:"DONUTS",
+    image:"assets/category-donuts.jpg"
+  },
+  {
+    _id: uuid(),
+    categoryName: "Breads",
+    categoryIdentity:"BREADS",
+    image:"assets/category-breads.jpg"
+  }
 ];
