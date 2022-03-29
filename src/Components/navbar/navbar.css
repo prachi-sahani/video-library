@@ -1,0 +1,22 @@
+.nav {
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 99;
+  box-shadow: 1px 1px 2px 1px var(--black-050);
+}
+
+.logo {
+  height: 3rem;
+}
+
+/* visible for screens below 1050px */
+.nav-list {
+  display: none;
+}
+
+/* visible for screens below 600px */
+.navbar-menu-list {
+  display: none;
+}
