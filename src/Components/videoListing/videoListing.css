@@ -1,0 +1,60 @@
+  .filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+  
+  .filter-tag-item {
+    padding: 0.5rem 0.75rem;
+    background-color: var(--black-inverted);
+    border: thin solid var(--primary-500);
+    color: var(--primary-900);
+    border-radius: 1.25rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.9rem;
+    margin: 2px;
+    cursor: pointer;
+  }
+  
+  .filter-tag-item:hover, .category-selected {
+    border-color: var(--primary-900);
+    color: var(--black-inverted);
+    background-color: var(--primary-900);
+  }
+  
+  .video-card {
+    max-width: 30%;
+  }
+  
+  
+  /* specifically for responsiveness of cards displayed */
+  @media screen and (max-width: 1050px) {
+ 
+    .videos {
+      width: 100%;
+    }
+    
+    .video-card {
+      max-width: 42%;
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .sidenav {
+      display: none;
+    }
+
+    .video-card {
+      max-width: 80%;
+    }
+  }
+  
+  @media screen and (max-width: 400px) {
+    .video-card {
+      max-width: 100%;
+    }
+  }
+  
