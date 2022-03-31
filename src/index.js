@@ -6,6 +6,7 @@ import { makeServer } from "./server";
 import { BrowserRouter } from "react-router-dom";
 import { DBdataProvider } from "./context/db-data-context";
 import { VideoListProvider } from "./context/video-list-management";
+import { AuthProvider } from "./context/authorization-context";
 
 // Call make Server
 makeServer();
@@ -13,11 +14,13 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <DBdataProvider>
-        <VideoListProvider>
-          <App />
-        </VideoListProvider>
-      </DBdataProvider>
+      <AuthProvider>
+        <DBdataProvider>
+          <VideoListProvider>
+            <App />
+          </VideoListProvider>
+        </DBdataProvider>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

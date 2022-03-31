@@ -16,4 +16,12 @@ function getVideos() {
   }
 }
 
-export { getCategories, getVideos };
+function login(data) {
+  try {
+    return axios.post("/api/auth/login", data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export { getCategories, getVideos, login };

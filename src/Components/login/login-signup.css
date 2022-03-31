@@ -1,0 +1,41 @@
+.auth-page{
+  min-height: calc(100vh - 15rem);
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.auth-card{
+  padding: 1rem;
+  margin: auto;
+  min-width: 50%;
+  max-width: 90%;
+  height: fit-content;
+}
+
+.signup-auth:active,
+.login-auth:active {
+color: var(--primary-900);
+}
+
+.btn-auth {
+display: block;
+text-align: center;
+width: 100%;
+margin: 0;
+}
+
+.auth-input-group {
+margin: 1rem 0;
+}
+
+.auth-checkbox {
+padding: 0;
+margin-top: 0;
+}
+
+@media screen and (max-width: 600px) {
+.auth-window .dialog-box {
+  padding: 2rem;
+}
+}
