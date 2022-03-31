@@ -1,6 +1,6 @@
 import axios from "axios";
 
- function getCategories() {
+function getCategories() {
   try {
     return axios.get("/api/categories");
   } catch (error) {
@@ -8,4 +8,12 @@ import axios from "axios";
   }
 }
 
-export { getCategories }
+function getVideos() {
+  try {
+    return axios.get("/api/videos");
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export { getCategories, getVideos };

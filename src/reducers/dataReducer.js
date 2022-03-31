@@ -6,6 +6,12 @@ export function dataReducer(state, action) {
         categories: action.payload,
       };
     }
+    case "VIDEOS": {
+      return {
+        ...state,
+        videos: action.payload,
+      };
+    }
     default:
       return { ...state };
   }
