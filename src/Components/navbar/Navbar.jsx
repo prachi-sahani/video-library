@@ -18,7 +18,7 @@ export function Navbar() {
               <li className="txt-primary list-item">Home</li>
             </Link>
             <Link className="link" to="/">
-              <li className="txt-primary list-item">Watch Now</li>
+              <li className="txt-primary list-item">Explore</li>
             </Link>
           </ul>
           <div className="navbar-action">
