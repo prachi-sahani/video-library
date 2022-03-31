@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useDBdata } from "../../context/db-data-context";
-import { Loader } from "../../Components/loader/Loader"
+import { Loader } from "../../components/loader/Loader"
 import { CategoryCard } from "./CategoryCard"
 import "./homePage.css";
 import { useEffect } from "react";
