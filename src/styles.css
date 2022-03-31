@@ -9,7 +9,7 @@ body {
 }
 
 a {
-  color: var(--primary-900);
+  color: inherit;
   text-decoration: none;
 }
 
@@ -82,11 +82,28 @@ nav {
   line-height: 1.5;
 }
 
-.products {
-  padding: 1rem;
+/* common styling for all radio buttons and checkboxes - will include it in component library later on */
+.radio-input-group,
+.checkbox-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-left: 0.5rem;
 }
 
-.product-list {
+input[type="radio"],
+input[type="checkbox"] {
+  height: 0.9rem;
+  width: 0.9rem;
+}
+
+input[type="radio"]:checked,
+input[type="checkbox"]:checked,
+input[type="range"] {
+  accent-color: var(--primary-900);
+}
+
+.video-list {
   display: flex;
   flex-wrap: wrap;
 }
@@ -95,10 +112,62 @@ nav {
   position: relative;
 }
 
-.wishlist {
+.like-video {
   font-size: 1.5rem;
   cursor: pointer;
-  color: var(--red-500);
+  color: var(--primary-900);
+}
+
+.videos {
+  padding: 1rem;
+}
+
+.video-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.video-card:hover {
+  /* transform: scale(1.01); */
+  cursor: pointer;
+}
+
+.badge-bestseller {
+  font-size: 0.75rem;
+}
+
+.card-image {
+  position: relative;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  gap: 2px;
+  background-color: var(--primary-800);
+  color: var(--black-050);
+  padding: 4px 6px;
+  border-radius: 2px;
+  width: fit-content;
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+}
+
+.video-card .card-header {
+  padding-bottom: 0;
+}
+
+.video-title {
+  color: var(--black-600);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.btn-watch-now {
+  margin: 2px 0;
 }
 
 @media screen and (max-width: 600px) {

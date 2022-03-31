@@ -10,7 +10,8 @@ import {
   function DBdataProvider({ children }) {
   
     const [dataState, dataDispatch] = useReducer(dataReducer, {
-      categories: []
+      categories: [],
+      videos:[]
     });
   
   
