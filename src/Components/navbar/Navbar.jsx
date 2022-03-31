@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/authorization-context";
 import "../../styles.css";
-import "./navbar.css"
+import "./navbar.css";
 export function Navbar() {
+  const { authToken, logout } = useAuth();
   return (
     <nav className="nav">
       <div className="navbar">
@@ -13,7 +15,7 @@ export function Navbar() {
           ></img>
         </Link>
         <div className="navbar-nav">
-        <ul className="list-group-inline navbar-nav-list">
+          <ul className="list-group-inline navbar-nav-list">
             <Link className="link" to="/">
               <li className="txt-primary list-item">Home</li>
             </Link>
@@ -22,17 +24,15 @@ export function Navbar() {
             </Link>
           </ul>
           <div className="navbar-action">
-            {/* {authToken ? (
-              <button
-                className="btn-basic btn-primary btn-sm link"
-              >
+            {authToken ? (
+              <button className="btn-basic btn-primary btn-sm link" onClick={logout}>
                 LOGOUT
               </button>
-            ) : ( */}
-            <Link to="/login" className="btn-basic btn-primary btn-sm link">
-              LOGIN/SIGNUP
-            </Link>
-            {/* )} */}
+            ) : (
+              <Link to="/login" className="btn-basic btn-primary btn-sm link">
+                LOGIN/SIGNUP
+              </Link>
+            )}
           </div>
         </div>
         <div className="navbar-menu">
