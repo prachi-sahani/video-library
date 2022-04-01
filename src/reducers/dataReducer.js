@@ -12,6 +12,18 @@ export function dataReducer(state, action) {
         videos: action.payload,
       };
     }
+    case "LIKED_VIDEOS": {
+      return {
+        ...state,
+        likedVideos: action.payload,
+      };
+    }
+    case "WATCH_LATER_VIDEOS": {
+      return {
+        ...state,
+        watchLaterVideos: action.payload,
+      };
+    }
     default:
       return { ...state };
   }
