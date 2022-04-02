@@ -1,0 +1,23 @@
+.video-preview {
+  width: 100%;
+}
+
+.page-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content-details-section {
+    width: 35%;
+    color: var(--black-600);
+  }
+
+@media screen and (max-width: 600px) {
+  .content-details-section {
+    width: 100%;
+  }
+  .video-preview {
+    display: none;
+  }
+}
