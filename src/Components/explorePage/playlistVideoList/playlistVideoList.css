@@ -1,0 +1,36 @@
+.list .video-item {
+  display: flex;
+  max-height: 7rem;
+  height: fit-content;
+  gap: 8px;
+  width: 100%;
+  padding: 1rem;
+}
+
+.list {
+  color: var(--black-600);
+}
+
+.video-list-section {
+  width: 65%;
+}
+
+
+.video-content {
+  flex-grow: 1;
+}
+
+.video-thumbnail {
+  max-width: 7rem;
+  object-fit: fill;
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 600px) {
+    .video-list-section {
+        width: 100%;
+    }
+    .video-content {
+        width: 65%;
+      }
+}
