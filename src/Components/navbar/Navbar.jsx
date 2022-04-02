@@ -10,7 +10,7 @@ export function Navbar() {
         <Link className="link" to="/">
           <img
             className="navbar-brand logo"
-            src="assets/logo.png"
+            src="/assets/logo.png"
             alt="CakeTube"
           ></img>
         </Link>
@@ -19,7 +19,7 @@ export function Navbar() {
             <Link className="link" to="/">
               <li className="txt-primary list-item">Home</li>
             </Link>
-            <Link className="link" to="/">
+            <Link className="link" to="/explore">
               <li className="txt-primary list-item">Explore</li>
             </Link>
           </ul>

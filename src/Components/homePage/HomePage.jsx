@@ -23,7 +23,7 @@ export function HomePage() {
         <div className="hero-text heading h2">
           <em className="my-1">TAKE YOUR BAKING SKILLS TO THE NEXT LEVEL</em>
           <Link to="/explore" className="btn-basic btn-primary btn-md">
-            Watch Now
+            Explore Now
           </Link>
         </div>
         <img

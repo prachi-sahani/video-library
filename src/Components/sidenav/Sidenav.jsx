@@ -7,9 +7,7 @@ export function Sidenav() {
     <div className="sidenav px-2">
       <ul className="list-group-stacked">
         {sidenavItemList.map((item) => (
-          <li key={item.title} className="list-item txt-center">
-            <SidenavItem item={item} />
-          </li>
+          <SidenavItem key={item.title} item={item} />
         ))}
       </ul>
     </div>

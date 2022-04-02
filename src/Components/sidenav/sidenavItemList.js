@@ -12,21 +12,21 @@ export const sidenavItemList = [
     {
         title:"Playlists",
         iconName:"library_music",
-        route:"/playlists"
+        route:"/explore/playlists"
     },
     {
         title:"Watch Later",
         iconName:"watch_later",
-        route:"/watchLater"
+        route:"/explore/watchLater"
     },
     {
         title:"Liked Videos",
         iconName:"thumb_up",
-        route:"/likedVideos"
+        route:"/explore/likedVideos"
     },
     {
         title:"History",
         iconName:"history",
-        route:"/history"
+        route:"/explore/history"
     },
 ]

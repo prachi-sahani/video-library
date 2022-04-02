@@ -4,7 +4,6 @@ const VideoListContext = createContext();
 
 function VideoListProvider({ children }) {
   const { dataState } = useDBdata();
-
   const [selectedCategory, setSelectedCategory] = useState("all");
 
   const filteredVideoArray = getFilteredVideosArray(
