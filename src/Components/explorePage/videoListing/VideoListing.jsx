@@ -1,15 +1,15 @@
 import "./videoListing.css";
-import "../../styles.css";
+import "../../../styles.css";
 import { CategoryTags } from "./CategoryTags";
-import { Loader } from "../loader/Loader";
+import { Loader } from "../../loader/Loader";
 import { VideoCard } from "./VideoCard";
-import { useDBdata } from "../../context/db-data-context";
+import { useDBdata } from "../../../context/db-data-context";
 import {
   getCategories,
   getVideos,
-} from "../../utilities/server-request/server-request";
+} from "../../../utilities/server-request/server-request";
 import { useEffect } from "react";
-import { useVideoListData } from "../../context/video-list-management";
+import { useVideoListData } from "../../../context/video-list-management";
 
 export function VideoListing() {
   const { dataState, dataDispatch } = useDBdata();

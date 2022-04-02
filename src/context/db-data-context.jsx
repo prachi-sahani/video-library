@@ -11,7 +11,9 @@ import {
   
     const [dataState, dataDispatch] = useReducer(dataReducer, {
       categories: [],
-      videos:[]
+      videos:[],
+      likedVideos:null,
+      watchLaterVideos:null,
     });
   
   
