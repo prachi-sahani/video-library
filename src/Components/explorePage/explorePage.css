@@ -1,6 +1,14 @@
 .explore-page {
-    display: flex;
-    width: 100%;
-    min-height: calc(100vh - 21.5rem);
-  }
- 
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 21.5rem);
+}
+
+.action-icon {
+  font-size: 1.35rem;
+}
+
+.video-item .action-icon {
+  margin: 0;
+  padding: 0 0.5rem;
+}
