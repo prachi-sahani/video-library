@@ -12,7 +12,6 @@ export function PlaylistVideoList({data}) {
   async function deleteItem(id){
     if(pathname.includes("watchLater")){
       const watchLaterVideoData = await removeFromWatchLaterVideo(authToken, id);
-      console.log( watchLaterVideoData.data.watchlater);
       dataDispatch({type: "WATCH_LATER_VIDEOS", payload: watchLaterVideoData.data.watchlater})
     }
     else if(pathname.includes("likedVideos")){
