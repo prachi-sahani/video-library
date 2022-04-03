@@ -24,6 +24,12 @@ export function dataReducer(state, action) {
         watchLaterVideos: action.payload,
       };
     }
+    case "HISTORY_VIDEOS": {
+      return {
+        ...state,
+        historyVideos: action.payload,
+      };
+    }
     default:
       return { ...state };
   }
