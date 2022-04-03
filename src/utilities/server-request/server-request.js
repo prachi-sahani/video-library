@@ -36,9 +36,13 @@ function getLikedVideos(token) {
 
 function addToLikedVideo(token, video) {
   try {
-    return axios.post("/api/user/likes", { video }  , {
-      headers: { authorization: token },
-    });
+    return axios.post(
+      "/api/user/likes",
+      { video },
+      {
+        headers: { authorization: token },
+      }
+    );
   } catch (error) {
     console.log(error);
   }
@@ -66,9 +70,13 @@ function getWatchLaterVideos(token) {
 
 function addToWatchLaterVideo(token, video) {
   try {
-    return axios.post("/api/user/watchlater", { video }  , {
-      headers: { authorization: token },
-    });
+    return axios.post(
+      "/api/user/watchlater",
+      { video },
+      {
+        headers: { authorization: token },
+      }
+    );
   } catch (error) {
     console.log(error);
   }
@@ -84,5 +92,62 @@ function removeFromWatchLaterVideo(token, videoId) {
   }
 }
 
+function getHistory(token) {
+  try {
+    return axios.get("/api/user/history", {
+      headers: { authorization: token },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-export { getCategories, getVideos, login, getLikedVideos, addToLikedVideo, removeFromLikedVideo, getWatchLaterVideos, addToWatchLaterVideo, removeFromWatchLaterVideo };
+function addToHistory(token, video) {
+  try {
+    return axios.post(
+      "/api/user/history",
+      { video },
+      {
+        headers: { authorization: token },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function removeFromHistory(token, videoId) {
+  try {
+    return axios.delete(`/api/user/history/${videoId}`, {
+      headers: { authorization: token },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function clearAllHistory(token) {
+  try {
+    return axios.delete(`/api/user/history/all`, {
+      headers: { authorization: token },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export {
+  getCategories,
+  getVideos,
+  login,
+  getLikedVideos,
+  addToLikedVideo,
+  removeFromLikedVideo,
+  getWatchLaterVideos,
+  addToWatchLaterVideo,
+  removeFromWatchLaterVideo,
+  getHistory,
+  addToHistory,
+  removeFromHistory,
+  clearAllHistory
+};

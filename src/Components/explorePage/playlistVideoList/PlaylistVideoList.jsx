@@ -1,7 +1,7 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../../context/authorization-context";
 import { useDBdata } from "../../../context/db-data-context";
-import { removeFromLikedVideo, removeFromWatchLaterVideo } from "../../../utilities/server-request/server-request";
+import { removeFromHistory, removeFromLikedVideo, removeFromWatchLaterVideo } from "../../../utilities/server-request/server-request";
 import "./playlistVideoList.css";
 
 export function PlaylistVideoList({data}) {
@@ -18,6 +18,11 @@ export function PlaylistVideoList({data}) {
       const likedVideoData = await removeFromLikedVideo(authToken, id);
       dataDispatch({type: "LIKED_VIDEOS", payload: likedVideoData.data.likes})
     }
+    else if(pathname.includes("history")){
+      const historyData = await removeFromHistory(authToken, id);
+      dataDispatch({type: "HISTORY_VIDEOS", payload: [...historyData.data.history].reverse()})
+    }
+    
   }
 
   return (
@@ -28,15 +33,17 @@ export function PlaylistVideoList({data}) {
       <ul className="list-group-stacked list ">
         {data.map((item) => (
           <li key={item._id} className="list-item video-item ">
+            <Link to={`/explore/video/${item._id}`}>
             <img
               className="video-thumbnail"
               src={`/${item.thumbnail}`}
               alt={item.title}
             />
-            <div className="video-content ">
+            </Link>
+            <Link to={`/explore/video/${item._id}`} className="video-content">
               <p className="txt-bold list-title">{item.title}</p>
               <p className="txt txt-gray">By {item.creator}</p>
-            </div>
+            </Link>
             <div className="action-button">
               <button className="btn-icon action-icon material-icons" onClick={() => deleteItem(item._id)}>
                 delete
