@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/authorization-context";
 import { useDBdata } from "../../../context/db-data-context";
 import { addToLikedVideo, addToWatchLaterVideo, removeFromLikedVideo, removeFromWatchLaterVideo } from "../../../utilities/server-request/server-request";
@@ -54,10 +54,10 @@ export function VideoCard({ video }) {
   }
   return (
     <div className="video-card card card-w-badge">
-      <div className="card-image">
+      <Link className="card-image" to={`/explore/video/${video._id}`}>
         <img alt={video.title} className="card-img" src={video.thumbnail} />
         <div className="product-rating">200 views</div>
-      </div>
+      </Link>
 
       <div className="card-header">
         <div className="card-title video-title">{video.title}</div>
