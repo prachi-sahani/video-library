@@ -6,6 +6,7 @@ import { LikedVideos } from "./likedVideos/LikedVideos";
 import { WatchLaterVideos } from "./watchLaterVideos/WatchLaterVideos";
 import { HistoryVideos } from "./history-page/HistoryPage";
 import { SingleVideoPage } from "./singleVideoPage/SingleVideoPage";
+import { PageNotFound } from "../pageNotFound/PageNotFound";
 
 export function ExplorePage() {
   return (
@@ -17,6 +18,7 @@ export function ExplorePage() {
         <Route path="/likedVideos" element={<LikedVideos />}></Route>
         <Route path="/video/:videoID" element={<SingleVideoPage />}></Route>
         <Route path="/history" element={<HistoryVideos />}></Route>
+        <Route path="*" exact={true} element={<PageNotFound />} />
       </Routes>
     </main>
   );
