@@ -30,6 +30,12 @@ export function dataReducer(state, action) {
         historyVideos: action.payload,
       };
     }
+    case "PLAYLISTS": {
+      return {
+        ...state,
+        playlists: action.payload,
+      };
+    }
     default:
       return { ...state };
   }

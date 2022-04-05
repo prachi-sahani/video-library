@@ -8,12 +8,16 @@ import {
   getCategories,
   getVideos,
 } from "../../../utilities/server-request/server-request";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useVideoListData } from "../../../context/video-list-management";
+import { PlaylistDialog } from "../playlistDialog/PlaylistDialog";
 
 export function VideoListing() {
   const { dataState, dataDispatch } = useDBdata();
   const { filteredVideoArray } = useVideoListData();
+  const [showPlaylistDialog, setShowPlaylistDialog] = useState(false);
+  const [videoSelected, setVideoSelected] = useState(null)
+
   useEffect(() => {
     if (!dataState.videos.length) {
       (async () => {
@@ -41,15 +45,18 @@ export function VideoListing() {
         {dataState.videos?.length > 0 && dataState.categories?.length > 0 && (
           <div className="video-list">
             {filteredVideoArray.map((video) => (
-              <VideoCard key={video._id} video={video} />
+              <VideoCard key={video._id} video={video} setShowPlaylistDialog={setShowPlaylistDialog} setVideoSelected={setVideoSelected} />
             ))}
             {!filteredVideoArray.length && (
-              <div className="mx-auto h3 py-5">
+              <div className="mx-auto heading h3 txt-gray py-5">
                 We couldn't find any matches!
               </div>
             )}
           </div>
         )}
+        {showPlaylistDialog && 
+          <PlaylistDialog videoSelected={videoSelected} setShowPlaylistDialog={setShowPlaylistDialog}/>
+        }
         {dataState.videos?.length === 0 &&
           dataState.categories?.length === 0 && <Loader />}
       </div>

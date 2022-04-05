@@ -1,13 +1,14 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useAuth } from "../../../context/authorization-context";
 import { useDBdata } from "../../../context/db-data-context";
-import { removeFromHistory, removeFromLikedVideo, removeFromWatchLaterVideo } from "../../../utilities/server-request/server-request";
+import { removeFromHistory, removeFromLikedVideo, removeFromWatchLaterVideo, removeVideoFromPlaylist } from "../../../utilities/server-request/server-request";
 import "./playlistVideoList.css";
 
 export function PlaylistVideoList({data}) {
-  const {pathname} = useLocation()
+  const {pathname} = useLocation();
+  const { playlistID } = useParams()
   const { authToken } = useAuth();
-  const { dataDispatch } = useDBdata();
+  const { dataState, dataDispatch } = useDBdata();
 
   async function deleteItem(id){
     if(pathname.includes("watchLater")){
@@ -21,6 +22,12 @@ export function PlaylistVideoList({data}) {
     else if(pathname.includes("history")){
       const historyData = await removeFromHistory(authToken, id);
       dataDispatch({type: "HISTORY_VIDEOS", payload: [...historyData.data.history].reverse()})
+    }
+    else{
+      // for user playlists
+      const playlistData = await removeVideoFromPlaylist(authToken, playlistID, id);
+      dataDispatch({type: "PLAYLISTS", payload: dataState.playlists.map(item => item._id === playlistID ? playlistData.data.playlist : item)})
+
     }
     
   }

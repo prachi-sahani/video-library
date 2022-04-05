@@ -21,6 +21,7 @@ function DBdataProvider({ children }) {
     likedVideos: null,
     watchLaterVideos: null,
     historyVideos: null,
+    playlists: null,
   });
 
   async function updateLikedVideo(data, videoID) {
@@ -86,25 +87,31 @@ function DBdataProvider({ children }) {
     return isVideoWatchLater && authToken ? "" : "-outlined";
   }
 
-  async function addVideoToHistory(videoData){
+  async function addVideoToHistory(videoData) {
     const isVideoInHistory =
-    dataState.historyVideos.findIndex((item) => item._id === videoData._id) >= 0
-      ? true
-      : false;
-      // if video already in history, bring it to top
-      if (isVideoInHistory) {
-        dataDispatch({
-          type: "HISTORY_VIDEOS",
-          payload: [videoData,...dataState.historyVideos.filter(item => item._id !== videoData._id)],
-        });
-      } else {
-        const historyData = await addToHistory(authToken, videoData);
-        dataDispatch({
-          type: "HISTORY_VIDEOS",
-          payload: [...historyData.data.history].reverse(), // last watched video on top
-        });
-      }
-  
+      dataState.historyVideos?.findIndex(
+        (item) => item._id === videoData._id
+      ) >= 0
+        ? true
+        : false;
+    // if video already in history, bring it to top
+    if (isVideoInHistory) {
+      dataDispatch({
+        type: "HISTORY_VIDEOS",
+        payload: [
+          videoData,
+          ...dataState.historyVideos.filter(
+            (item) => item._id !== videoData._id
+          ),
+        ],
+      });
+    } else {
+      const historyData = await addToHistory(authToken, videoData);
+      dataDispatch({
+        type: "HISTORY_VIDEOS",
+        payload: [...historyData.data.history].reverse(), // last watched video on top
+      });
+    }
   }
   return (
     <DBdataContext.Provider
@@ -115,7 +122,7 @@ function DBdataProvider({ children }) {
         updateWatchLaterVideo,
         getLikeStatusClassName,
         getWatchLaterStatusClassName,
-        addVideoToHistory
+        addVideoToHistory,
       }}
     >
       {children}

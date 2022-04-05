@@ -136,6 +136,70 @@ function clearAllHistory(token) {
   }
 }
 
+function getPlaylists(token) {
+  try {
+    return axios.get("/api/user/playlists", {
+      headers: { authorization: token },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function addPlaylist(token, playlist) {
+  try {
+    return axios.post(
+      "/api/user/playlists",
+      { playlist },
+      { headers: { authorization: token } }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function removePlaylist(token, playlistId) {
+  try {
+    return axios.delete(`/api/user/playlists/${playlistId}`, {
+      headers: { authorization: token },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function getSelectedPlaylist(token, playlistId) {
+  try {
+    return axios.get(`/api/user/playlists/${playlistId}`, {
+      headers: { authorization: token },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function addVideoToPlaylist(token, playlistId, video) {
+  try {
+    return axios.post(
+      `api/user/playlists/${playlistId}`,
+      { video },
+      { headers: { authorization: token } }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function removeVideoFromPlaylist(token, playlistId, videoId) {
+  try {
+    return axios.delete(`/api/user/playlists/${playlistId}/${videoId}`, {
+      headers: { authorization: token },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export {
   getCategories,
   getVideos,
@@ -149,5 +213,11 @@ export {
   getHistory,
   addToHistory,
   removeFromHistory,
-  clearAllHistory
+  clearAllHistory,
+  getPlaylists,
+  addPlaylist,
+  removePlaylist,
+  getSelectedPlaylist,
+  addVideoToPlaylist,
+  removeVideoFromPlaylist,
 };

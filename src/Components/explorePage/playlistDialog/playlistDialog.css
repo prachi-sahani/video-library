@@ -1,0 +1,37 @@
+.btn-create-playlist{
+    gap: 2px;
+    justify-content: center;
+    width: 100%;
+}
+
+.playlist-dialog{
+    color: var(--black-600);
+    width: fit-content;
+    max-height: 70%;
+    overflow-y: auto;
+    min-width: 15rem;
+}
+
+.playlist-dialog .dialog-header{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.playlist-input{
+    color: var(--black-600);
+    font-size: 0.9rem;
+    outline: none;
+    display: block;
+    border-bottom: thin var(--black-300) solid;
+}
+
+.input-msg{
+    display: flex;
+    justify-content: space-between;
+}
+
+.msg-err{
+    color: var(--red-500);
+}
