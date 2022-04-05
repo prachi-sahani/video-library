@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useAuth } from "../../../context/authorization-context";
 import { useDBdata } from "../../../context/db-data-context";
 import { addToLikedVideo, addToWatchLaterVideo, removeFromLikedVideo, removeFromWatchLaterVideo } from "../../../utilities/server-request/server-request";
 import "./videoListing.css";
 
-export function VideoCard({ video }) {
+export function VideoCard({ video, setShowPlaylistDialog, setVideoSelected }) {
   const { authToken } = useAuth();
   const navigate = useNavigate();
   const { dataState, dataDispatch} = useDBdata();
@@ -46,6 +47,17 @@ export function VideoCard({ video }) {
     }
   }
 
+  async function addVideoToPlaylist(data){
+    if(authToken){
+      setVideoSelected(data);
+      setShowPlaylistDialog(true);
+    }
+    else{
+      localStorage.setItem("lastRoute", "/explore");
+      navigate("/login")
+    }
+  }
+
   function getLikeStatusClassName(){
     return isVideoLiked && authToken ? "" : "-outlined" ;
   }
@@ -69,16 +81,14 @@ export function VideoCard({ video }) {
           <button className={`btn-icon btn-sm btn-outline-primary material-icons${getLikeStatusClassName()}`} onClick={() => updateLikedVideo(video)}>
             thumb_up
           </button>
-          {/* <button className="btn-icon btn-sm btn-outline-primary material-icons-outlined">
-            thumb_down
-          </button> */}
+        
           <button className={`btn-icon btn-sm btn-outline-primary material-icons${getWatchLaterStatusClassName()}`} onClick={() => updateWatchLaterVideo(video)}>
             watch_later
           </button>
+            <button className="btn-icon btn-sm btn-outline-primary material-icons-outlined" onClick={() => addVideoToPlaylist(video)}>
+            playlist_add
+          </button>
         </div>
-        {/* <button className="btn-basic btn-primary w-100 btn-watch-now">
-            Watch Now
-          </button> */}
       </div>
     </div>
   );

@@ -1,0 +1,44 @@
+.playlist-page{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-self: flex-start;
+}
+
+.playlist-card{
+    background-color: var(--black-050);
+    width: 20%;
+    cursor: pointer;
+    margin: 8px;
+    padding: 1rem;
+    min-height: 7rem;   
+    height: fit-content;
+}
+
+.playlist-card .card-title{
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    align-items: center;
+    color: var(--black-600);
+}
+
+@media screen and (max-width: 1050px) {
+    .playlist-card{
+        width: 30%;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .playlist-card{
+        width: 40%;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .playlist-card{
+        width: 100%;
+    }
+}
