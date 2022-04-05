@@ -21,9 +21,9 @@ export function CategoryTags({ categories }) {
         <div
           key={category._id}
           className={`filter-tag-item ${isCategorySelected(
-            category.categoryName
+            category.categoryIdentity
           )}`}
-          onClick={() => setSelectedCategory(category.categoryName)}
+          onClick={() => setSelectedCategory(category.categoryIdentity)}
         >
           {category.categoryName.toUpperCase()}
         </div>
