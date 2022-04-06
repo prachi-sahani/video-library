@@ -3,5 +3,4 @@
   .loadingMessage{
     margin: 2rem auto;
     min-height: calc(100vh - 18.5rem);
-    color: (--black-600);
   }

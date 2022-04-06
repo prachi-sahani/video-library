@@ -17,7 +17,7 @@ export const sidenavItemList = [
     {
         title:"Watch Later",
         iconName:"watch_later",
-        route:"/explore/watchLater"
+        route:"/explore/playlists/watchLater"
     },
     {
         title:"Liked Videos",
