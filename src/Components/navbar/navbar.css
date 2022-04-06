@@ -26,6 +26,9 @@
   .navbar-nav-list {
     display: none;
   }
+  .navbar-action{
+    padding: 0;
+  }
   .navbar {
     padding: 0.5rem;
   }
