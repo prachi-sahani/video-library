@@ -103,7 +103,7 @@ export function VideoCard({ video, setShowPlaylistDialog, setVideoSelected }) {
     <div className="video-card card card-w-badge">
       <Link className="card-image" to={`/explore/video/${video._id}`}>
         <img alt={video.title} className="card-img" src={video.thumbnail} />
-        <div className="product-rating">200 views</div>
+        {/* <div className="product-rating">200 views</div> */}
       </Link>
 
       <div className="card-header">

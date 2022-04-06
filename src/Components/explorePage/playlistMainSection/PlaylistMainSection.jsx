@@ -90,7 +90,7 @@ export function PlaylistMainSection({ data, pageTitle, playlistID }) {
           </button>
         )}
       </div>
-      <p className="px-2">{data.length} videos</p>
+      <p className="px-2">{data.length || "No"} {data.length ===1 ? "video" : "videos"}</p>
     </div>
   );
 }
