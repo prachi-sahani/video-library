@@ -32,4 +32,49 @@ export const videos = [
     creator: "Spicy Foodz",
     category:"CAKES"
   },
+  {
+    _id: "Z1OLG7F3HD4",
+    title: "Fudgy Brownie Recipe",
+    description:"A chocolate brownie is a baked chocolate dessert. The 2 main kinds for brownies are cakey and the fudgy. In today's video, I've shared the recipe for the perfect fudgy brownies. These are the fudgiest brownies you can ever think of, perfect crisp crackly top, super fudgy center, moist and gooey in all bites. You can add nuts or chocolate chunks to your brownies or serve with whipped cream or vanilla ice cream as per your preference.",
+    url: "https://www.youtube-nocookie.com/embed/Z1OLG7F3HD4",
+    thumbnail:"assets/thumbnail-fudgy-brownie.png",
+    creator: "Spice Bangla",
+    category:"BROWNIES"
+  },
+  {
+    _id: "-xkpHye6H_E",
+    title: "Healthy Oatmeal Cookies",
+    description:"Oatmeal Cookies are nutrient-dense and delicious and can be a great breakfast, healthy dessert, or midnight snack!",
+    url: "https://www.youtube-nocookie.com/embed/-xkpHye6H_E",
+    thumbnail:"assets/thumbnail-oatmeal-cookies.png",
+    creator: "The Cooking Foodie",
+    category:"COOKIES"
+  },
+  {
+    _id: "JD3BT8rUGIg",
+    title: "Eggless Donuts Recipe",
+    description:"Finally, here is the most awaited recipe and perhaps one of the most requested recipe :) These donuts are quite easy to make, however, you will have to follow the measurements and steps very carefully. After all, baking is a process that needs precision and patience. Happy Cooking & Enjoy!",
+    url: "https://www.youtube-nocookie.com/embed/JD3BT8rUGIg",
+    thumbnail:"assets/thumbnail-eggless-donuts.png",
+    creator: "The Terrace Kitchen",
+    category:"DONUTS"
+  },
+  {
+    _id: "hO6FfAyjGB0",
+    title: "Chocolate Chip Cookies",
+    description:"If you are looking for crunchy and tasty choco chip cookies, you got to try this recipe. An easy choco chip cookies recipe that would give you the best cookies!",
+    url: "https://www.youtube-nocookie.com/embed/hO6FfAyjGB0",
+    thumbnail:"assets/thumbnail-eggless-chocochip-cookies.png",
+    creator: "The Terrace Kitchen",
+    category:"COOKIES"
+  },
+  {
+    _id: "demCt-E4-NM",
+    title: "Chocolate Cupcakes Recipe",
+    description:"Learn how to make the best chocolate cupcakes – super moist, fluffy and chocolaty cupcakes with chocolate buttercream. This recipe is very easy and better than any store bought cake mix. ",
+    url: "https://www.youtube-nocookie.com/embed/demCt-E4-NM",
+    thumbnail:"assets/thumbnail-chocolate-cupcake.png",
+    creator: "The Cooking Foodie",
+    category:"PASTRIES"
+  },
 ];
