@@ -47,7 +47,7 @@ export const addNewPlaylistHandler = function (schema, request) {
   if (user) {
     const { playlist } = JSON.parse(request.requestBody);
     user.playlists.push({ ...playlist, videos: [], _id: uuid() });
-    return new Response(201, {}, { playlists: user.playlists });
+    return new Response(201, {}, { playlists: user.playlists, message:"Playlist created!" });
   }
   return new Response(
     404,
@@ -71,7 +71,7 @@ export const removePlaylistHandler = function (schema, request) {
       (item) => item._id !== playlistId
     );
     this.db.users.update({ playlists: filteredPlaylists });
-    return new Response(200, {}, { playlists: filteredPlaylists });
+    return new Response(200, {}, { playlists: filteredPlaylists, message:"Playlist removed!" });
   }
   return new Response(
     404,
@@ -121,7 +121,7 @@ export const addVideoToPlaylistHandler = function (schema, request) {
       );
     }
     playlist.videos.push(video);
-    return new Response(201, {}, { playlist });
+    return new Response(201, {}, { playlist, message:"Video added to playlist" });
   }
   return new Response(
     404,
@@ -145,7 +145,7 @@ export const removeVideoFromPlaylistHandler = function (schema, request) {
       (item) => item._id !== videoId
     );
     playlist.videos = filteredVideos;
-    return new Response(200, {}, { playlist });
+    return new Response(200, {}, { playlist, message:"Video removed from playlist" });
   }
   return new Response(
     404,

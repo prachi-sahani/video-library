@@ -68,7 +68,7 @@ export const loginHandler = function (schema, request) {
       return new Response(
         404,
         {},
-        { errors: ["The email you entered is not Registered. Not Found error"] }
+        { errors: ["Email not registered"] }
       );
     }
     if (password === foundUser.password) {
@@ -84,7 +84,7 @@ export const loginHandler = function (schema, request) {
       {},
       {
         errors: [
-          "The credentials you entered are invalid. Unauthorized access error.",
+          "Invalid credentials",
         ],
       }
     );

@@ -56,7 +56,7 @@ export const addItemToWatchLaterVideos = function (schema, request) {
       );
     }
     user.watchlater.push(video);
-    return new Response(201, {}, { watchlater: user.watchlater });
+    return new Response(201, {}, { watchlater: user.watchlater, message: "Video added to watch later" });
   }
   return new Response(
     404,
@@ -80,7 +80,7 @@ export const removeItemFromWatchLaterVideos = function (schema, request) {
       (item) => item._id !== videoId
     );
     this.db.users.update({ watchlater: filteredVideos });
-    return new Response(200, {}, { watchlater: filteredVideos });
+    return new Response(200, {}, { watchlater: filteredVideos, message: "Video removed from watch later"});
   }
   return new Response(
     404,
