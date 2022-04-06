@@ -35,7 +35,7 @@ export function WatchLaterVideos() {
         })();
       }
     } else {
-      localStorage.setItem("lastRoute", "/explore/watchLater");
+      localStorage.setItem("lastRoute", "/explore/playlists/watchLater");
       navigate("/login");
     }
   }, []);
