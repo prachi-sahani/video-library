@@ -32,7 +32,7 @@ function AuthProvider({ children }) {
       navigate(lastRoute ? lastRoute : "/");
     } catch (err) {
       setIsLoading(false);
-      showSnackbar(err.response.data.errors[0]);
+      showSnackbar(err?.response ?  err.response.data.errors[0] : "Some error occurred. Try again!" ) 
     }
   }
   function logout() {
