@@ -96,7 +96,7 @@ export const removeVideoFromHistoryHandler = function (schema, request) {
     const videoId = request.params.videoId;
     const filteredHistory = user.history.filter((item) => item._id !== videoId);
     this.db.users.update({ history: filteredHistory });
-    return new Response(200, {}, { history: filteredHistory });
+    return new Response(200, {}, { history: filteredHistory, message:"Video removed from history" });
   } catch (error) {
     return new Response(
       500,
@@ -126,7 +126,7 @@ export const clearHistoryHandler = function (schema, request) {
       );
     }
     this.db.users.update({ history: [] });
-    return new Response(200, {}, { history: [] });
+    return new Response(200, {}, { history: [], message: "History cleared!" });
   } catch (error) {
     return new Response(
       500,

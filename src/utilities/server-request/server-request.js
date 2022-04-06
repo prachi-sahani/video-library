@@ -1,203 +1,127 @@
 import axios from "axios";
 
 function getCategories() {
-  try {
-    return axios.get("/api/categories");
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.get("/api/categories");
 }
 
 function getVideos() {
-  try {
-    return axios.get("/api/videos");
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.get("/api/videos");
 }
 
 function login(data) {
-  try {
-    return axios.post("/api/auth/login", data);
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.post("/api/auth/login", data);
 }
 
 function getLikedVideos(token) {
-  try {
-    return axios.get("/api/user/likes", {
-      headers: { authorization: token },
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.get("/api/user/likes", {
+    headers: { authorization: token },
+  });
 }
 
 function addToLikedVideo(token, video) {
-  try {
-    return axios.post(
-      "/api/user/likes",
-      { video },
-      {
-        headers: { authorization: token },
-      }
-    );
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.post(
+    "/api/user/likes",
+    { video },
+    {
+      headers: { authorization: token },
+    }
+  );
 }
 
 function removeFromLikedVideo(token, videoId) {
-  try {
-    return axios.delete(`/api/user/likes/${videoId}`, {
-      headers: { authorization: token },
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.delete(`/api/user/likes/${videoId}`, {
+    headers: { authorization: token },
+  });
 }
 
 function getWatchLaterVideos(token) {
-  try {
-    return axios.get("/api/user/watchlater", {
-      headers: { authorization: token },
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.get("/api/user/watchlater", {
+    headers: { authorization: token },
+  });
 }
 
 function addToWatchLaterVideo(token, video) {
-  try {
-    return axios.post(
-      "/api/user/watchlater",
-      { video },
-      {
-        headers: { authorization: token },
-      }
-    );
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.post(
+    "/api/user/watchlater",
+    { video },
+    {
+      headers: { authorization: token },
+    }
+  );
 }
 
 function removeFromWatchLaterVideo(token, videoId) {
-  try {
-    return axios.delete(`/api/user/watchlater/${videoId}`, {
-      headers: { authorization: token },
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.delete(`/api/user/watchlater/${videoId}`, {
+    headers: { authorization: token },
+  });
 }
 
 function getHistory(token) {
-  try {
-    return axios.get("/api/user/history", {
-      headers: { authorization: token },
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.get("/api/user/history", {
+    headers: { authorization: token },
+  });
 }
 
 function addToHistory(token, video) {
-  try {
-    return axios.post(
-      "/api/user/history",
-      { video },
-      {
-        headers: { authorization: token },
-      }
-    );
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.post(
+    "/api/user/history",
+    { video },
+    {
+      headers: { authorization: token },
+    }
+  );
 }
 
 function removeFromHistory(token, videoId) {
-  try {
-    return axios.delete(`/api/user/history/${videoId}`, {
-      headers: { authorization: token },
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.delete(`/api/user/history/${videoId}`, {
+    headers: { authorization: token },
+  });
 }
 
 function clearAllHistory(token) {
-  try {
-    return axios.delete(`/api/user/history/all`, {
-      headers: { authorization: token },
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.delete(`/api/user/history/all`, {
+    headers: { authorization: token },
+  });
 }
 
 function getPlaylists(token) {
-  try {
-    return axios.get("/api/user/playlists", {
-      headers: { authorization: token },
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.get("/api/user/playlists", {
+    headers: { authorization: token },
+  });
 }
 
 function addPlaylist(token, playlist) {
-  try {
-    return axios.post(
-      "/api/user/playlists",
-      { playlist },
-      { headers: { authorization: token } }
-    );
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.post(
+    "/api/user/playlists",
+    { playlist },
+    { headers: { authorization: token } }
+  );
 }
 
 function removePlaylist(token, playlistId) {
-  try {
-    return axios.delete(`/api/user/playlists/${playlistId}`, {
-      headers: { authorization: token },
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.delete(`/api/user/playlists/${playlistId}`, {
+    headers: { authorization: token },
+  });
 }
 
 function getSelectedPlaylist(token, playlistId) {
-  try {
-    return axios.get(`/api/user/playlists/${playlistId}`, {
-      headers: { authorization: token },
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.get(`/api/user/playlists/${playlistId}`, {
+    headers: { authorization: token },
+  });
 }
 
 function addVideoToPlaylist(token, playlistId, video) {
-  try {
-    return axios.post(
-      `api/user/playlists/${playlistId}`,
-      { video },
-      { headers: { authorization: token } }
-    );
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.post(
+    `api/user/playlists/${playlistId}`,
+    { video },
+    { headers: { authorization: token } }
+  );
 }
 
 function removeVideoFromPlaylist(token, playlistId, videoId) {
-  try {
-    return axios.delete(`/api/user/playlists/${playlistId}/${videoId}`, {
-      headers: { authorization: token },
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  return axios.delete(`/api/user/playlists/${playlistId}/${videoId}`, {
+    headers: { authorization: token },
+  });
 }
 
 export {

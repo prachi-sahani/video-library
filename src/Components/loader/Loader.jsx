@@ -2,6 +2,6 @@ import "./loader.css"
 
 export function Loader(){
     return(
-        <h2 className="heading h2 loadingMessage txt-center">Loading...</h2>
+        <h2 className="heading h3 loadingMessage txt-center txt-gray">Loading...</h2>
     )
 }

@@ -9,7 +9,10 @@ import {
   LoginPage,
   SignupPage,
 } from "./components/index";
+import { Snackbar } from "./components/snackbar/Snackbar";
+import { useMessageHandling } from "./context/message-handling";
 function App() {
+  const{errorMessage} = useMessageHandling()
   return (
     <div>
       <Navbar />
@@ -20,6 +23,7 @@ function App() {
         <Route path="/explore/*" element={<ExplorePage />}></Route>
         <Route path="*" exact={true} element={<PageNotFound />} />
       </Routes>
+      {errorMessage &&  <Snackbar />}
       <Footer />
     </div>
   );

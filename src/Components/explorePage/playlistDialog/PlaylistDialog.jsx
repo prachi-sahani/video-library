@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/authorization-context";
 import { useDBdata } from "../../../context/db-data-context";
+import { useMessageHandling } from "../../../context/message-handling";
 import {
   addToWatchLaterVideo,
   addVideoToPlaylist,
@@ -16,6 +17,7 @@ export function PlaylistDialog({ videoSelected, setShowPlaylistDialog }) {
   const { authToken } = useAuth();
   const { dataState, dataDispatch } = useDBdata();
   const [showCreatePlaylistForm, setShowCreatePlaylistForm] = useState(false);
+  const { showSnackbar } = useMessageHandling();
 
   const isVideoWatchLater =
     dataState.watchLaterVideos?.findIndex(
@@ -26,11 +28,16 @@ export function PlaylistDialog({ videoSelected, setShowPlaylistDialog }) {
     if (authToken) {
       if (!dataState.playlists) {
         (async () => {
-          const playlistsData = await getPlaylists(authToken);
-          dataDispatch({
-            type: "PLAYLISTS",
-            payload: playlistsData.data.playlists,
-          });
+          try {
+            const playlistsData = await getPlaylists(authToken);
+            dataDispatch({
+              type: "PLAYLISTS",
+              payload: playlistsData.data.playlists,
+            });
+          } catch (err) {
+            showSnackbar("Some error occurred. Try Again!");
+            setShowPlaylistDialog(false);
+          }
         })();
       }
     }
@@ -38,21 +45,27 @@ export function PlaylistDialog({ videoSelected, setShowPlaylistDialog }) {
 
   async function updateWatchLaterVideo(data, isChecked) {
     if (authToken) {
-      if (!isChecked) {
-        const watchLaterVideoData = await removeFromWatchLaterVideo(
-          authToken,
-          data._id
-        );
-        dataDispatch({
-          type: "WATCH_LATER_VIDEOS",
-          payload: watchLaterVideoData.data.watchlater,
-        });
+      try{
+        if (!isChecked) {
+          const watchLaterVideoData = await removeFromWatchLaterVideo(
+            authToken,
+            data._id
+          );
+          dataDispatch({
+            type: "WATCH_LATER_VIDEOS",
+            payload: watchLaterVideoData.data.watchlater,
+          });
+        showSnackbar(watchLaterVideoData.data.message)
       } else {
-        const watchLaterVideoData = await addToWatchLaterVideo(authToken, data);
-        dataDispatch({
-          type: "WATCH_LATER_VIDEOS",
-          payload: watchLaterVideoData.data.watchlater,
-        });
+          const watchLaterVideoData = await addToWatchLaterVideo(authToken, data);
+          dataDispatch({
+            type: "WATCH_LATER_VIDEOS",
+            payload: watchLaterVideoData.data.watchlater,
+          });
+        showSnackbar(watchLaterVideoData.data.message)
+        }
+      }catch(err){
+        showSnackbar("Some error occurred. Try Again!");
       }
     } else {
       localStorage.setItem("lastRoute", "/explore");
@@ -61,30 +74,36 @@ export function PlaylistDialog({ videoSelected, setShowPlaylistDialog }) {
   }
 
   async function updateVideoInPlaylist(isChecked, playlistID, videoData) {
-    if (!isChecked) {
-      const updatedList = await removeVideoFromPlaylist(
-        authToken,
-        playlistID,
-        videoData._id
-      );
-      dataDispatch({
-        type: "PLAYLISTS",
-        payload: dataState.playlists.map((item) =>
-          item._id === playlistID ? updatedList.data.playlist : item
-        ),
-      });
-    } else {
-      const updatedList = await addVideoToPlaylist(
-        authToken,
-        playlistID,
-        videoData
-      );
-      dataDispatch({
-        type: "PLAYLISTS",
-        payload: dataState.playlists.map((item) =>
-          item._id === playlistID ? updatedList.data.playlist : item
-        ),
-      });
+    try {
+      if (!isChecked) {
+        const updatedList = await removeVideoFromPlaylist(
+          authToken,
+          playlistID,
+          videoData._id
+        );
+        dataDispatch({
+          type: "PLAYLISTS",
+          payload: dataState.playlists.map((item) =>
+            item._id === playlistID ? updatedList.data.playlist : item
+          ),
+        });
+        showSnackbar(updatedList.data.message)
+      } else {
+        const updatedList = await addVideoToPlaylist(
+          authToken,
+          playlistID,
+          videoData
+        );
+        dataDispatch({
+          type: "PLAYLISTS",
+          payload: dataState.playlists.map((item) =>
+            item._id === playlistID ? updatedList.data.playlist : item
+          ),
+        });
+        showSnackbar(updatedList.data.message)
+      }
+    } catch (err) {
+      showSnackbar("Some error occurred. Try Again!");
     }
   }
 

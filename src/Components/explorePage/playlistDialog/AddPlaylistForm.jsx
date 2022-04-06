@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../../context/authorization-context";
 import { useDBdata } from "../../../context/db-data-context";
+import { useMessageHandling } from "../../../context/message-handling";
 import {
   addPlaylist,
   addVideoToPlaylist,
@@ -17,6 +18,7 @@ export function AddPlaylistForm({
   const [playlistDescription, setPlaylistDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const { showSnackbar } = useMessageHandling();
 
   function updateNewPlaylistData(type, value) {
     if (type === "title") {
@@ -30,27 +32,35 @@ export function AddPlaylistForm({
   async function createPlaylist(event, title, description) {
     event.preventDefault();
     if (title) {
-      setLoading(true);
-      const updatedPlaylists = await addPlaylist(authToken, {
-        title,
-        description,
-      });
-      const updatedPlaylistData =
-        updatedPlaylists.data.playlists[
-          updatedPlaylists.data.playlists.length - 1
-        ];
-      const updatedVideoList = await addVideoToPlaylist(
-        authToken,
-        updatedPlaylistData._id,
-        videoSelected
-      );
-      dataDispatch({
-        type: "PLAYLISTS",
-        payload: [...dataState.playlists, updatedVideoList.data.playlist],
-      });
-      setLoading(false);
-      setShowCreatePlaylistForm(false);
-      setShowPlaylistDialog(false);
+      try{
+        setLoading(true);
+        const updatedPlaylists = await addPlaylist(authToken, {
+          title,
+          description,
+        });
+        const updatedPlaylistData =
+          updatedPlaylists.data.playlists[
+            updatedPlaylists.data.playlists.length - 1
+          ];
+
+        const updatedVideoList = await addVideoToPlaylist(
+          authToken,
+          updatedPlaylistData._id,
+          videoSelected
+        );
+        dataDispatch({
+          type: "PLAYLISTS",
+          payload: [...dataState.playlists, updatedVideoList.data.playlist],
+        });
+        showSnackbar(updatedVideoList.data.message);
+        setLoading(false);
+        setShowCreatePlaylistForm(false);
+        setShowPlaylistDialog(false);
+      }catch(err){
+        setLoading(false);
+        showSnackbar("Some error occurred. Try Again!");
+      }
+     
     } else {
       setErrorMsg("Required field");
     }

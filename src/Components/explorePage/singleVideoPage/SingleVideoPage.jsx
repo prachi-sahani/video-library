@@ -9,25 +9,37 @@ import { MoreVideos } from "./MoreVideos";
 import { VideoPreview } from "./VideoPreview";
 import { Loader } from "../../loader/Loader";
 import { useAuth } from "../../../context/authorization-context";
+import { ErrorPage } from "../../errorPage/ErrorPage";
 
 export function SingleVideoPage() {
   const { videoID } = useParams();
   const { authToken } = useAuth();
   const { dataState, dataDispatch, addVideoToHistory } = useDBdata();
   const [currentVideo, setCurrentVideo] = useState(null);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!dataState.videos.length) {
+    if (dataState.videos.length === 0) {
       (async () => {
-        const videoListData = await getVideos();
-        const videoData = videoListData.data.videos.find(
-          (item) => item._id === videoID
-        );
-        setCurrentVideo(videoData);
-        dataDispatch({ type: "VIDEOS", payload: videoListData.data.videos });
-        if (authToken) {
-          addVideoToHistory(videoData);
+        try{
+          setLoading(true);
+          const videoListData = await getVideos();
+          const videoData = videoListData.data.videos.find(
+            (item) => item._id === videoID
+          );
+          setCurrentVideo(videoData);
+          dataDispatch({ type: "VIDEOS", payload: videoListData.data.videos });
+          if (authToken) {
+            addVideoToHistory(videoData);
+          }
+          setLoading(false);
         }
+        catch(err){
+          setLoading(false);
+          setError(true);
+        }
+        
       })();
     } else {
       const videoData = dataState.videos.find((item) => item._id === videoID);
@@ -46,7 +58,8 @@ export function SingleVideoPage() {
       {dataState?.videos.length > 0 && (
         <MoreVideos videos={dataState?.videos} />
       )}
-      {dataState?.videos.length === 0 && <Loader />}
+      {loading && <Loader />}
+      {error && <ErrorPage/>}
     </div>
   );
 }

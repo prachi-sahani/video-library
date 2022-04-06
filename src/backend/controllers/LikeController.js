@@ -19,7 +19,7 @@ export const getLikedVideosHandler = function (schema, request) {
         404,
         {},
         {
-          errors: ["The email you entered is not Registered. Not Found error"],
+          errors: ["Email not registered"],
         }
       );
     }
@@ -55,13 +55,13 @@ export const addItemToLikedVideos = function (schema, request) {
       );
     }
     user.likes.push(video);
-    return new Response(201, {}, { likes: user.likes });
+    return new Response(201, {}, { likes: user.likes, message:"Video added to liked videos" });
   }
   return new Response(
     404,
     {},
     {
-      errors: ["The email you entered is not Registered. Not Found error"],
+      errors: ["Email not registered"],
     }
   );
 };
@@ -77,7 +77,7 @@ export const removeItemFromLikedVideos = function (schema, request) {
     const videoId = request.params.videoId;
     const filteredLikes = user.likes.filter((item) => item._id !== videoId);
     this.db.users.update({ likes: filteredLikes });
-    return new Response(200, {}, { likes: filteredLikes });
+    return new Response(200, {}, { likes: filteredLikes, message:"Video removed from liked videos"  });
   }
   return new Response(
     404,
