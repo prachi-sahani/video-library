@@ -4,6 +4,7 @@ const MessageHandlingContext = createContext();
 
 function MessageHandlingProvider({children}){
   const [errorMessage, setErrorMessage] = useState("")
+  const [showSidenav, setShowSidenav] = useState(false)
 
     function showSnackbar(message){
         setErrorMessage(message);
@@ -16,7 +17,9 @@ function MessageHandlingProvider({children}){
         <MessageHandlingContext.Provider value={{
             showSnackbar,
             dismissSnackbar,
-            errorMessage
+            errorMessage,
+            showSidenav,
+            setShowSidenav
         }}>
             {children}
         </MessageHandlingContext.Provider>

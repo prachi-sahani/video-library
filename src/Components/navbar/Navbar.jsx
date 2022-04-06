@@ -1,12 +1,24 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../context/authorization-context";
+import { useMessageHandling } from "../../context/message-handling";
 import "../../styles.css";
+import { SidenavSmallScreen } from "../sideNavSmallScreen/SidenavSmallScreen";
 import "./navbar.css";
+
 export function Navbar() {
   const { authToken, logout } = useAuth();
+  const { showSidenav, setShowSidenav } = useMessageHandling();
   return (
     <nav className="nav">
       <div className="navbar">
+        {/* for screens less than 600px */}
+        <button
+          className=" btn-nav-small btn-icon btn-outline-primary mr-2 material-icons"
+          onClick={() => setShowSidenav((value) => !value)}
+        >
+          {showSidenav ? "menu_open" : "menu"}
+        </button>
+
         <Link className="link" to="/">
           <img
             className="navbar-brand logo"
@@ -16,16 +28,29 @@ export function Navbar() {
         </Link>
         <div className="navbar-nav">
           <ul className="list-group-inline navbar-nav-list">
-            <Link className="link" to="/">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "txt-bold link " : "link"
+              }
+            >
               <li className="txt-primary list-item">Home</li>
-            </Link>
-            <Link className="link" to="/explore">
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "txt-bold link " : "link"
+              }
+              to="/explore"
+            >
               <li className="txt-primary list-item">Explore</li>
-            </Link>
+            </NavLink>
           </ul>
           <div className="navbar-action">
             {authToken ? (
-              <button className="btn-basic btn-primary btn-sm link" onClick={logout}>
+              <button
+                className="btn-basic btn-primary btn-sm link"
+                onClick={logout}
+              >
                 LOGOUT
               </button>
             ) : (
@@ -35,20 +60,25 @@ export function Navbar() {
             )}
           </div>
         </div>
-        <div className="navbar-menu">
-          <button className="navbar-menu-btn btn-basic btn-outline-primary material-icons btn-md">
-            menu
+        {/* for screens less than 600px */}
+        {authToken ? (
+          <button
+            className="btn-nav-small btn-icon btn-outline-primary ml-auto material-icons"
+            onClick={logout}
+          >
+            logout
           </button>
-          <ul className="navbar-menu-list list-group-stacked">
-            <Link className="link" to="/">
-              <li className="txt-primary list-item">Signup/Login </li>
-            </Link>
-            <Link className="link" to="/">
-              <li className="txt-primary list-item">Account</li>
-            </Link>
-          </ul>
-        </div>
+        ) : (
+          <Link
+            to="/login"
+            className="btn-nav-small btn-icon btn-outline-primary ml-auto material-icons"
+          >
+            login
+          </Link>
+        )}
       </div>
+      {/* for screens less than 600px */}
+      {showSidenav && <SidenavSmallScreen />}
     </nav>
   );
 }
