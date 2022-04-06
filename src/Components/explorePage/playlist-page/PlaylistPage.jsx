@@ -3,25 +3,34 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/authorization-context";
 import { useDBdata } from "../../../context/db-data-context";
 import { getPlaylists } from "../../../utilities/server-request/server-request";
+import { ErrorPage } from "../../errorPage/ErrorPage";
 import { Loader } from "../../loader/Loader";
 import "./playlistPage.css";
 export function PlaylistPage() {
   const { authToken } = useAuth();
   const { dataState, dataDispatch } = useDBdata();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     if (authToken) {
       if (!dataState.playlists) {
         (async () => {
-          setLoading(true);
-          const playlistsData = await getPlaylists(authToken);
-          setLoading(false);
-          dataDispatch({
-            type: "PLAYLISTS",
-            payload: playlistsData.data.playlists,
-          });
+          try{
+            setLoading(true);
+            const playlistsData = await getPlaylists(authToken);
+            setLoading(false);
+            dataDispatch({
+              type: "PLAYLISTS",
+              payload: playlistsData.data.playlists,
+            });
+          }
+          catch(err){
+            setLoading(false);
+            setError(true)
+          }
+        
         })();
       }
     } else {
@@ -39,16 +48,15 @@ export function PlaylistPage() {
         </div>
       </div> */}
 
-      <Link
+      {loading && <Loader />}
+      {error && <ErrorPage />}
+      {dataState.playlists && <Link
         to="/explore/playlists/watchLater"
         key="watchLater"
         className="playlist-card card card-basic"
       >
         <div className="card-title">Watch Later</div>
-      </Link>
-
-      {loading && <Loader />}
-
+      </Link>}
       {dataState.playlists?.map((item) => (
         <Link
           to={`/explore/playlists/${item._id}`}

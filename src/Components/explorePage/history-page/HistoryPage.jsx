@@ -7,17 +7,20 @@ import { PlaylistMainSection } from "../playlistMainSection/PlaylistMainSection"
 import { PlaylistVideoList } from "../playlistVideoList/PlaylistVideoList";
 import "./historyPage.css";
 import { Loader } from "../../loader/Loader";
+import { ErrorPage } from "../../errorPage/ErrorPage";
 
 export function HistoryVideos() {
   const { authToken } = useAuth();
   const navigate = useNavigate();
   const { dataState, dataDispatch } = useDBdata();
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     if (authToken) {
       if (!dataState.historyVideos) {
         (async () => {
+          try{
           setLoading(true)
           const historyVideosData = await getHistory(authToken);
           setLoading(false)
@@ -25,6 +28,10 @@ export function HistoryVideos() {
             type: "HISTORY_VIDEOS",
             payload: historyVideosData.data.history,
           });
+        }catch(error){
+          setLoading(false);
+          setError(true);
+        }
         })();
       }
     } else {
@@ -35,6 +42,7 @@ export function HistoryVideos() {
   return (
     <div className="main-content">
       {loading && <Loader/>}
+      {error && <ErrorPage/>}
       {dataState.historyVideos?.length >= 0 && (
         <PlaylistMainSection
           data={dataState.historyVideos}

@@ -7,23 +7,32 @@ import { PlaylistMainSection } from "../playlistMainSection/PlaylistMainSection"
 import { PlaylistVideoList } from "../playlistVideoList/PlaylistVideoList";
 import "./likedVideos.css";
 import { Loader } from "../../loader/Loader";
+import {ErrorPage} from "../../errorPage/ErrorPage"
 
 export function LikedVideos() {
   const { authToken } = useAuth();
   const navigate = useNavigate();
   const { dataState, dataDispatch } = useDBdata();
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
   useEffect(() => {
     if (authToken) {
       if (!dataState.likedVideos) {
         (async () => {
-          setLoading(true)
-          const likedVideosData = await getLikedVideos(authToken);
-          setLoading(false)
-          dataDispatch({
-            type: "LIKED_VIDEOS",
-            payload: likedVideosData.data.likes,
-          });
+          try{
+            setLoading(true)
+            const likedVideosData = await getLikedVideos(authToken);
+            setLoading(false)
+            dataDispatch({
+              type: "LIKED_VIDEOS",
+              payload: likedVideosData.data.likes,
+            });
+          }
+          catch(err){
+              setLoading(false);
+              setError(true)
+          }
+        
         })();
       }
     } else {
@@ -34,6 +43,7 @@ export function LikedVideos() {
   return (
     <div className="main-content">
       {loading && <Loader/>}
+      {error && <ErrorPage/>}
       {dataState.likedVideos?.length >= 0 && (
         <PlaylistMainSection
           data={dataState.likedVideos}

@@ -7,31 +7,48 @@ import { useAuth } from "../../../context/authorization-context";
 import "./playlistMainSection.css";
 import { useState } from "react";
 import { useDBdata } from "../../../context/db-data-context";
+import { useMessageHandling } from "../../../context/message-handling";
 
 export function PlaylistMainSection({ data, pageTitle, playlistID }) {
   const { pathname } = useLocation();
   const { authToken } = useAuth();
   const { dataDispatch } = useDBdata();
   const navigate = useNavigate();
+  const { showSnackbar } = useMessageHandling()
   const [clearHistoryText, setClearHistoryText] = useState("Clear History");
 
   async function clearHistory() {
-    setClearHistoryText("Clearing...");
-    const historyData = await clearAllHistory(authToken);
-    dataDispatch({
-      type: "HISTORY_VIDEOS",
-      payload: historyData.data.history,
-    });
-    setClearHistoryText("Clear History");
+    try{
+      setClearHistoryText("Clearing...");
+      const historyData = await clearAllHistory(authToken);
+      showSnackbar(historyData.data.message);
+      dataDispatch({
+        type: "HISTORY_VIDEOS",
+        payload: historyData.data.history,
+      });
+      setClearHistoryText("Clear History");
+    }
+    catch(err){
+      setClearHistoryText("Clear History");
+      showSnackbar("Some error occurred. Try Again!");
+    }
+    
   }
 
   async function deletePlaylist(id) {
-    const updatedPlaylist = await removePlaylist(authToken, id);
-    dataDispatch({
-      type: "PLAYLISTS",
-      payload: updatedPlaylist.data.playlists,
-    });
-    navigate("/explore/playlists");
+    try{
+      const updatedPlaylist = await removePlaylist(authToken, id);
+      showSnackbar(updatedPlaylist.data.message);
+      dataDispatch({
+        type: "PLAYLISTS",
+        payload: updatedPlaylist.data.playlists,
+      });
+      navigate("/explore/playlists");
+    }
+    catch(err){
+      showSnackbar("Some error occurred. Try Again!")
+    }
+    
   }
 
   return (

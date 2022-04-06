@@ -7,17 +7,20 @@ import { PlaylistVideoList } from "../playlistVideoList/PlaylistVideoList";
 import "./watchLaterVideos.css";
 import { getWatchLaterVideos } from "../../../utilities/server-request/server-request";
 import { Loader } from "../../loader/Loader";
+import { ErrorPage } from "../../errorPage/ErrorPage";
 
 export function WatchLaterVideos() {
   const { dataState, dataDispatch } = useDBdata();
   const { authToken } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     if (authToken) {
       if (!dataState.watchLaterVideos) {
         (async () => {
+          try{
           setLoading(true);
           const watchLaterVideosData = await getWatchLaterVideos(authToken);
           setLoading(false);
@@ -25,6 +28,10 @@ export function WatchLaterVideos() {
             type: "WATCH_LATER_VIDEOS",
             payload: watchLaterVideosData.data.watchlater,
           });
+        }catch(err){
+          setLoading(false);
+          setError(true)
+        }
         })();
       }
     } else {
@@ -35,6 +42,7 @@ export function WatchLaterVideos() {
   return (
     <div className="main-content">
       {loading && <Loader/>}
+      {error && <ErrorPage/>}
       {dataState.watchLaterVideos?.length >= 0 && (
         <PlaylistMainSection
           data={dataState.watchLaterVideos}

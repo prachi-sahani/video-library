@@ -3,17 +3,29 @@ import { useDBdata } from "../../context/db-data-context";
 import { Loader } from "../../components/loader/Loader"
 import { CategoryCard } from "./CategoryCard"
 import "./homePage.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getCategories } from "../../utilities/server-request/server-request";
+import { ErrorPage } from "../errorPage/ErrorPage";
 
 export function HomePage() {
   const { dataState, dataDispatch } = useDBdata();
-  
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
   useEffect(() => {
     if (!dataState.categories.length) {
       (async () => {
-        const categoriesData = await getCategories();
-        dataDispatch({ type: "CATEGORIES", payload: categoriesData.data.categories });
+        try{
+          setLoading(true)
+          const categoriesData = await getCategories();
+          dataDispatch({ type: "CATEGORIES", payload: categoriesData.data.categories });
+          setLoading(false);
+        }
+        catch(err){
+          setLoading(false);
+          setError(true)
+        }
+      
       })()
     }
   },[])
@@ -40,7 +52,8 @@ export function HomePage() {
           <CategoryCard key={category._id} category={category} />
         ))}
       </div>
-      {!dataState.categories.length && <Loader />}
+      {loading && <Loader />}
+      {error && <ErrorPage/>}
     </main>
   );
 }

@@ -1,0 +1,6 @@
+.warning-snackbar .snackbar-close{
+    color: var(--black-200);
+}
+.warning-snackbar .snackbar-close:hover{
+    background-color: var(--black-600);
+}
