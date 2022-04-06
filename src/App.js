@@ -8,7 +8,7 @@ import {
   ExplorePage,
   LoginPage,
   SignupPage,
-} from "./components/index";
+} from "./components/index.jsx";
 import { Snackbar } from "./components/snackbar/Snackbar";
 import { useMessageHandling } from "./context/message-handling";
 function App() {
