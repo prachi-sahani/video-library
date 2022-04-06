@@ -1,14 +1,23 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import {
-  HomePage,
-  Navbar,
-  Footer,
-  PageNotFound,
-  ExplorePage,
-  LoginPage,
-  SignupPage,
-} from "./components/index.jsx";
+// import {
+// HomePage,
+//   Navbar,
+//   Footer,
+//   PageNotFound,
+//   ExplorePage,
+//   LoginPage,
+//   SignupPage,
+// } from "";
+
+import { HomePage } from "./components/homePage/HomePage";
+import { SignupPage } from "./components/login/SignupPage";
+import { LoginPage } from "./components/login/LoginPage";
+import { Navbar } from "./components/navbar/Navbar";
+import { Footer } from "./components/footer/Footer";
+import { PageNotFound } from "./components/pageNotFound/PageNotFound";
+import { ExplorePage } from "./components/explorePage/ExplorePage";
+
 import { Snackbar } from "./components/snackbar/Snackbar";
 import { useMessageHandling } from "./context/message-handling";
 function App() {
