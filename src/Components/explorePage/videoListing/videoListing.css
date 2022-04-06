@@ -43,10 +43,6 @@
   }
   
   @media screen and (max-width: 600px) {
-    .sidenav {
-      display: none;
-    }
-
     .video-card {
       max-width: 80%;
     }

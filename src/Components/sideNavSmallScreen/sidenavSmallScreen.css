@@ -1,0 +1,14 @@
+.sidenav-sm{
+    position: fixed;    
+    left: 0;
+    top: 4.15rem;
+    height: calc(100vh - 4.15rem);
+    background-color: var(--black-inverted);
+    overflow-y: auto;
+    color: var(--black-600);
+    z-index: 1;
+}
+
+.sidenav-sm .list-item{
+    padding: 1rem 1.5rem;
+}

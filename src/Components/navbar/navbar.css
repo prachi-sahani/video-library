@@ -12,11 +12,16 @@
 }
 
 /* visible for screens below 1050px */
-.nav-list {
+.btn-nav-small {
   display: none;
 }
 
-/* visible for screens below 600px */
-.navbar-menu-list {
-  display: none;
+
+@media screen and (max-width:600px) {
+ .btn-nav-small{
+   display: block;
+ }
+ .navbar{
+   padding: 0.5rem;
+ }
 }

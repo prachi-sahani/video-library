@@ -1,7 +1,7 @@
 .explore-page {
   display: flex;
   width: 100%;
-  min-height: calc(100vh - 21.5rem);
+  min-height: calc(100vh - 15rem);
 }
 
 .action-icon {

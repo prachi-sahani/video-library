@@ -8,3 +8,9 @@
     padding: 0;
     color: var(--black-600);
   }
+  
+  @media screen and (max-width: 600px) {
+    .sidenav {
+      display: none;
+    }
+  }

@@ -30,15 +30,6 @@ nav {
   height: 3rem;
 }
 
-/* visible for screens below 1050px */
-.nav-list {
-  display: none;
-}
-
-/* visible for screens below 600px */
-.navbar-menu-list {
-  display: none;
-}
 
 .badge-count {
   background-color: var(--black-500);
