@@ -16,12 +16,17 @@
   display: none;
 }
 
-
-@media screen and (max-width:600px) {
- .btn-nav-small{
-   display: block;
- }
- .navbar{
-   padding: 0.5rem;
- }
+@media screen and (max-width: 600px) {
+  .btn-nav-small {
+    display: block;
+  }
+  .navbar-nav {
+    display: flex;
+  }
+  .navbar-nav-list {
+    display: none;
+  }
+  .navbar {
+    padding: 0.5rem;
+  }
 }

@@ -60,22 +60,7 @@ export function Navbar() {
             )}
           </div>
         </div>
-        {/* for screens less than 600px */}
-        {authToken ? (
-          <button
-            className="btn-nav-small btn-icon btn-outline-primary ml-auto material-icons"
-            onClick={logout}
-          >
-            logout
-          </button>
-        ) : (
-          <Link
-            to="/login"
-            className="btn-nav-small btn-icon btn-outline-primary ml-auto material-icons"
-          >
-            login
-          </Link>
-        )}
+       
       </div>
       {/* for screens less than 600px */}
       {showSidenav && <SidenavSmallScreen />}
