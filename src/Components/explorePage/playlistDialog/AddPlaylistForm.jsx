@@ -32,7 +32,7 @@ export function AddPlaylistForm({
   async function createPlaylist(event, title, description) {
     event.preventDefault();
     if (title) {
-      try{
+      try {
         setLoading(true);
         const updatedPlaylists = await addPlaylist(authToken, {
           title,
@@ -56,11 +56,10 @@ export function AddPlaylistForm({
         setLoading(false);
         setShowCreatePlaylistForm(false);
         setShowPlaylistDialog(false);
-      }catch(err){
+      } catch (err) {
         setLoading(false);
         showSnackbar("Some error occurred. Try Again!");
       }
-     
     } else {
       setErrorMsg("Required field");
     }

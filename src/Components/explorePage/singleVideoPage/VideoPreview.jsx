@@ -1,12 +1,30 @@
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/authorization-context";
 import { useDBdata } from "../../../context/db-data-context";
 
-export function VideoPreview({ currentVideo, videoID }) {
+export function VideoPreview({
+  currentVideo,
+  videoID,
+  setShowPlaylistDialog,
+}) {
   const {
     getLikeStatusClassName,
     updateLikedVideo,
     getWatchLaterStatusClassName,
     updateWatchLaterVideo,
   } = useDBdata();
+  const { authToken } = useAuth();
+  const navigate = useNavigate();
+
+  async function openPlaylistDialog() {
+    if (authToken) {
+      setShowPlaylistDialog(true);
+    } else {
+      localStorage.setItem("lastRoute", "/explore");
+      navigate("/login");
+    }
+  }
+
   return (
     <div className="p-3 full-video-view">
       <iframe
@@ -39,7 +57,10 @@ export function VideoPreview({ currentVideo, videoID }) {
           >
             watch_later
           </button>
-          <button className="btn-icon btn-outline-primary material-icons">
+          <button
+            className="btn-icon btn-outline-primary material-icons"
+            onClick={() => openPlaylistDialog()}
+          >
             playlist_add
           </button>
         </div>

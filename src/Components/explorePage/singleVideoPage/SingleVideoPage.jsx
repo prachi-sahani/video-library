@@ -1,15 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDBdata } from "../../../context/db-data-context";
-import {
-  getVideos
-} from "../../../utilities/server-request/server-request";
+import { getVideos } from "../../../utilities/server-request/server-request";
 import "./singleVideoPage.css";
 import { MoreVideos } from "./MoreVideos";
 import { VideoPreview } from "./VideoPreview";
 import { Loader } from "../../loader/Loader";
 import { useAuth } from "../../../context/authorization-context";
 import { ErrorPage } from "../../errorPage/ErrorPage";
+import { PlaylistDialog } from "../playlistDialog/PlaylistDialog";
 
 export function SingleVideoPage() {
   const { videoID } = useParams();
@@ -18,11 +17,11 @@ export function SingleVideoPage() {
   const [currentVideo, setCurrentVideo] = useState(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const [showPlaylistDialog, setShowPlaylistDialog] = useState(false);
   useEffect(() => {
     if (dataState.videos.length === 0) {
       (async () => {
-        try{
+        try {
           setLoading(true);
           const videoListData = await getVideos();
           const videoData = videoListData.data.videos.find(
@@ -34,12 +33,10 @@ export function SingleVideoPage() {
             addVideoToHistory(videoData);
           }
           setLoading(false);
-        }
-        catch(err){
+        } catch (err) {
           setLoading(false);
           setError(true);
         }
-        
       })();
     } else {
       const videoData = dataState.videos.find((item) => item._id === videoID);
@@ -53,13 +50,23 @@ export function SingleVideoPage() {
   return (
     <div className="single-video-page">
       {currentVideo && (
-        <VideoPreview currentVideo={currentVideo} videoID={videoID} />
+        <VideoPreview
+          currentVideo={currentVideo}
+          videoID={videoID}
+          setShowPlaylistDialog={setShowPlaylistDialog}
+        />
       )}
       {dataState?.videos.length > 0 && (
         <MoreVideos videos={dataState?.videos} />
       )}
+      {showPlaylistDialog && (
+        <PlaylistDialog
+          videoSelected={currentVideo}
+          setShowPlaylistDialog={setShowPlaylistDialog}
+        />
+      )}
       {loading && <Loader />}
-      {error && <ErrorPage/>}
+      {error && <ErrorPage />}
     </div>
   );
 }
