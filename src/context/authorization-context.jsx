@@ -1,5 +1,5 @@
 import { useContext, useState, createContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { login } from "../utilities/server-request/server-request";
 import { useMessageHandling } from "./message-handling";
 
@@ -10,6 +10,7 @@ function AuthProvider({ children }) {
     sessionStorage.getItem("token") || ""
   );
   const navigate = useNavigate();
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const { showSnackbar } = useMessageHandling();
   async function loginAsGuest() {
@@ -22,14 +23,13 @@ function AuthProvider({ children }) {
       };
       const token = await login(data);
       setIsLoading(false);
-      const lastRoute = localStorage.getItem("lastRoute");
       setAuthToken(token.data.encodedToken);
       sessionStorage.setItem(
         "token",
         token.data.encodedToken ? token.data.encodedToken : ""
       );
-      localStorage.setItem("lastRoute", "/");
-      navigate(lastRoute ? lastRoute : "/");
+      const lastRoute = location?.state?.from?.pathname || "/";
+      navigate(lastRoute);
     } catch (err) {
       setIsLoading(false);
       showSnackbar(err?.response ?  err.response.data.errors[0] : "Some error occurred. Try again!" ) 

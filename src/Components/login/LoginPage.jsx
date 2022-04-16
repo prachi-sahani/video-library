@@ -8,13 +8,9 @@ export function LoginPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // if user is already logged in and tries to access login page, they will be redirected to lastRoute or home page
+    // if user is already logged in and tries to access login page, they will be redirected to previous page
     if (authToken) {
-      navigate(
-        localStorage.getItem("lastRoute")
-          ? localStorage.getItem("lastRoute")
-          : "/"
-      );
+      navigate(-1);
     }
   },[]);
 

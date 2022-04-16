@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/authorization-context";
 import { useDBdata } from "../../../context/db-data-context";
 
@@ -15,13 +15,13 @@ export function VideoPreview({
   } = useDBdata();
   const { authToken } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   async function openPlaylistDialog() {
     if (authToken) {
       setShowPlaylistDialog(true);
     } else {
-      localStorage.setItem("lastRoute", "/explore");
-      navigate("/login");
+      navigate("/login",{state: {from:location}});
     }
   }
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/authorization-context";
 import { useDBdata } from "../../../context/db-data-context";
 import { useMessageHandling } from "../../../context/message-handling";
@@ -24,6 +24,7 @@ export function PlaylistDialog({ videoSelected, setShowPlaylistDialog }) {
       (item) => item._id === videoSelected._id
     ) >= 0;
   const navigate = useNavigate();
+  const location = useLocation();
   useEffect(() => {
     if (authToken) {
       if (!dataState.playlists) {
@@ -68,8 +69,7 @@ export function PlaylistDialog({ videoSelected, setShowPlaylistDialog }) {
         showSnackbar("Some error occurred. Try Again!");
       }
     } else {
-      localStorage.setItem("lastRoute", "/explore");
-      navigate("/login");
+      navigate("/login",{state:{from:location}});
     }
   }
 

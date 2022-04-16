@@ -14,28 +14,21 @@ export function PlaylistPage() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (authToken) {
-      if (!dataState.playlists) {
-        (async () => {
-          try{
-            setLoading(true);
-            const playlistsData = await getPlaylists(authToken);
-            setLoading(false);
-            dataDispatch({
-              type: "PLAYLISTS",
-              payload: playlistsData.data.playlists,
-            });
-          }
-          catch(err){
-            setLoading(false);
-            setError(true)
-          }
-        
-        })();
-      }
-    } else {
-      localStorage.setItem("lastRoute", "/explore/playlists");
-      navigate("/login");
+    if (!dataState.playlists) {
+      (async () => {
+        try {
+          setLoading(true);
+          const playlistsData = await getPlaylists(authToken);
+          setLoading(false);
+          dataDispatch({
+            type: "PLAYLISTS",
+            payload: playlistsData.data.playlists,
+          });
+        } catch (err) {
+          setLoading(false);
+          setError(true);
+        }
+      })();
     }
   }, []);
   return (
@@ -50,13 +43,15 @@ export function PlaylistPage() {
 
       {loading && <Loader />}
       {error && <ErrorPage />}
-      {dataState.playlists && <Link
-        to="/explore/playlists/watchLater"
-        key="watchLater"
-        className="playlist-card card card-basic"
-      >
-        <div className="card-title">Watch Later</div>
-      </Link>}
+      {dataState.playlists && (
+        <Link
+          to="/explore/playlists/watchLater"
+          key="watchLater"
+          className="playlist-card card card-basic"
+        >
+          <div className="card-title">Watch Later</div>
+        </Link>
+      )}
       {dataState.playlists?.map((item) => (
         <Link
           to={`/explore/playlists/${item._id}`}

@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { dataReducer } from "../reducers/dataReducer";
 import {
   addToHistory,
@@ -16,6 +16,7 @@ const DBdataContext = createContext();
 function DBdataProvider({ children }) {
   const { authToken } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [dataState, dataDispatch] = useReducer(dataReducer, {
     categories: [],
     videos: [],
@@ -54,8 +55,8 @@ function DBdataProvider({ children }) {
         showSnackbar("Some error occurred. Try again!");
       }
     } else {
-      localStorage.setItem("lastRoute", `/explore/video/${videoID}`);
-      navigate("/login");
+      navigate("/login",{state:{from:location}});
+
     }
   }
 
@@ -90,8 +91,8 @@ function DBdataProvider({ children }) {
         showSnackbar("Some error occurred. Try again!");
       }
     } else {
-      localStorage.setItem("lastRoute", `/explore/video/${videoID}`);
-      navigate("/login");
+      navigate("/login",{state:{from:location}});
+
     }
   }
 

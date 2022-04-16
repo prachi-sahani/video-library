@@ -16,26 +16,21 @@ export function IndividualPlaylist() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   useEffect(() => {
-    if (authToken) {
-      if (!dataState.playlists) {
-        (async () => {
-          try {
-            setLoading(true);
-            const playlistData = await getPlaylists(authToken);
-            dataDispatch({
-              type: "PLAYLISTS",
-              payload: playlistData.data.playlists,
-            });
-            setLoading(false);
-          } catch (err) {
-            setLoading(false);
-            setError(true);
-          }
-        })();
-      }
-    } else {
-      localStorage.setItem("lastRoute", `/explore/playlists/${playlistID}`);
-      navigate("/login");
+    if (!dataState.playlists) {
+      (async () => {
+        try {
+          setLoading(true);
+          const playlistData = await getPlaylists(authToken);
+          dataDispatch({
+            type: "PLAYLISTS",
+            payload: playlistData.data.playlists,
+          });
+          setLoading(false);
+        } catch (err) {
+          setLoading(false);
+          setError(true);
+        }
+      })();
     }
   }, []);
 
