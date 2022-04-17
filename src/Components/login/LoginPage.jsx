@@ -22,6 +22,7 @@ export function LoginPage() {
   };
   const [loginForm, setLoginForm] = useState(initialFormData);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
+  const [showPassword, setShowPassword] = useState(false);
   useEffect(() => {
     // if user is already logged in and tries to access login page, they will be redirected to previous page
     if (authToken) {
@@ -90,13 +91,20 @@ export function LoginPage() {
             </label>
             <input
               className="input-outline w-100"
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               placeholder="*******"
               id="password"
               onChange={(e) => inputChangeHandler(e, "password")}
               required
             />
+            <button
+              className="btn-icon material-icons password-toggler"
+              type="button"
+              onClick={() => setShowPassword((value) => !value)}
+            >
+              {showPassword ? "visibility" : "visibility_off"}
+            </button>
             <small className="msg-error">{formErrors.passwordError}</small>
           </div>
 

@@ -22,6 +22,8 @@ export function SignupPage() {
   };
   const [signupForm, setSignupForm] = useState(initialFormData);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   useEffect(() => {
     // if user is already logged in and tries to access signup page, they will be redirected to previous page
@@ -149,13 +151,20 @@ export function SignupPage() {
             </label>
             <input
               className="input-outline w-100"
-              type="password"
+              type={showPassword ? "text" : "password"}
               name="password"
               placeholder="*******"
               id="password"
               onChange={(e) => inputChangeHandler(e, "password")}
               required
             />
+            <button
+              className="btn-icon material-icons password-toggler"
+              type="button"
+              onClick={() => setShowPassword((value) => !value)}
+            >
+              {showPassword ? "visibility" : "visibility_off"}
+            </button>
             <small className="msg-error">{formErrors.passwordError}</small>
           </div>
           <div className="input-group auth-input-group">
@@ -164,13 +173,20 @@ export function SignupPage() {
             </label>
             <input
               className="input-outline w-100"
-              type="password"
+              type={showConfirmPassword ? "text" : "password"}
               name="confirm-password"
               placeholder="*******"
               id="confirm-password"
               onChange={(e) => inputChangeHandler(e, "confirmPassword")}
               required
             />
+            <button
+              className="btn-icon material-icons password-toggler"
+              type="button"
+              onClick={() => setShowConfirmPassword((value) => !value)}
+            >
+              {showConfirmPassword ? "visibility" : "visibility_off"}
+            </button>
             <small className="msg-error">
               {formErrors.confirmPasswordError}
             </small>
