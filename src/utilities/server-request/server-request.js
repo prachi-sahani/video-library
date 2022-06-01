@@ -12,6 +12,10 @@ function login(data) {
   return axios.post("/api/auth/login", data);
 }
 
+function signup(data) {
+  return axios.post("/api/auth/signup", data);
+}
+
 function getLikedVideos(token) {
   return axios.get("/api/user/likes", {
     headers: { authorization: token },
@@ -128,6 +132,7 @@ export {
   getCategories,
   getVideos,
   login,
+  signup,
   getLikedVideos,
   addToLikedVideo,
   removeFromLikedVideo,

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/authorization-context";
 import { useDBdata } from "../../../context/db-data-context";
 import {
@@ -13,6 +13,7 @@ import { useMessageHandling } from "../../../context/message-handling";
 export function VideoCard({ video, setShowPlaylistDialog, setVideoSelected }) {
   const { authToken } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const { dataState, dataDispatch } = useDBdata();
   const { showSnackbar } = useMessageHandling();
   const isVideoLiked =
@@ -45,8 +46,8 @@ export function VideoCard({ video, setShowPlaylistDialog, setVideoSelected }) {
         showSnackbar("Some error occurred. Try again!");
       }
     } else {
-      localStorage.setItem("lastRoute", "/explore");
-      navigate("/login");
+      navigate("/login",{state:{from:location}});
+
     }
   }
 
@@ -78,8 +79,8 @@ export function VideoCard({ video, setShowPlaylistDialog, setVideoSelected }) {
         showSnackbar("Some error occurred. Try again!");
       }
     } else {
-      localStorage.setItem("lastRoute", "/explore");
-      navigate("/login");
+      navigate("/login",{state:{from:location}});
+
     }
   }
 
@@ -88,8 +89,8 @@ export function VideoCard({ video, setShowPlaylistDialog, setVideoSelected }) {
       setVideoSelected(data);
       setShowPlaylistDialog(true);
     } else {
-      localStorage.setItem("lastRoute", "/explore");
-      navigate("/login");
+      navigate("/login",{state:{from:location}});
+
     }
   }
 

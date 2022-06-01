@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../context/authorization-context";
 import { useDBdata } from "../../../context/db-data-context";
@@ -12,15 +11,13 @@ import { ErrorPage } from "../../errorPage/ErrorPage";
 export function WatchLaterVideos() {
   const { dataState, dataDispatch } = useDBdata();
   const { authToken } = useAuth();
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (authToken) {
-      if (!dataState.watchLaterVideos) {
-        (async () => {
-          try{
+    if (!dataState.watchLaterVideos) {
+      (async () => {
+        try {
           setLoading(true);
           const watchLaterVideosData = await getWatchLaterVideos(authToken);
           setLoading(false);
@@ -28,21 +25,17 @@ export function WatchLaterVideos() {
             type: "WATCH_LATER_VIDEOS",
             payload: watchLaterVideosData.data.watchlater,
           });
-        }catch(err){
+        } catch (err) {
           setLoading(false);
-          setError(true)
+          setError(true);
         }
-        })();
-      }
-    } else {
-      localStorage.setItem("lastRoute", "/explore/playlists/watchLater");
-      navigate("/login");
+      })();
     }
   }, []);
   return (
     <div className="main-content">
-      {loading && <Loader/>}
-      {error && <ErrorPage/>}
+      {loading && <Loader />}
+      {error && <ErrorPage />}
       {dataState.watchLaterVideos?.length >= 0 && (
         <PlaylistMainSection
           data={dataState.watchLaterVideos}
@@ -50,7 +43,10 @@ export function WatchLaterVideos() {
         />
       )}
       {dataState.watchLaterVideos?.length >= 0 && (
-        <PlaylistVideoList data={dataState.watchLaterVideos} page="watchLater"/>
+        <PlaylistVideoList
+          data={dataState.watchLaterVideos}
+          page="watchLater"
+        />
       )}
     </div>
   );
