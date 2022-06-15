@@ -7,7 +7,7 @@ export function MoreVideos({ videos }) {
         {videos?.map((item) => (
           <Link key={item._id} to={`/explore/video/${item._id}`}>
             <li className="list-item video-list-item">
-              <img
+              <img loading="lazy" 
                 className="video-list-thumbnail"
                 src={`/${item.thumbnail}`}
                 alt={item.title}

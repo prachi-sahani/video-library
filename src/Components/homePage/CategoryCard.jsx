@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useVideoListData } from "../../context/video-list-management";
 import "./homePage.css";
 
@@ -7,7 +6,7 @@ export function CategoryCard({category}){
  
     return(
         <div className="link card card-basic" onClick={() => goToVideoListing(category.categoryIdentity)}>
-        <img
+        <img loading="lazy" 
           className="card-content"
           src={category.image}
           alt={category.categoryName}

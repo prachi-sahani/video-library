@@ -53,10 +53,10 @@ export function PlaylistMainSection({ data, pageTitle, playlistID }) {
 
   return (
     <div className="content-details-section p-3">
-      <img
+      <img loading="lazy" 
         className="video-preview p-2"
         src={
-          data.length ? `/${data[0]?.thumbnail}` : "/assets/no-video-image.png"
+          data.length ? `/${data[0]?.thumbnail}` : "/assets/no-video-image.webp"
         }
         alt={data[0]?.title}
       />

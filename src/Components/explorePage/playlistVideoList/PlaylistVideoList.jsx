@@ -73,7 +73,7 @@ export function PlaylistVideoList({ data }) {
         {data.map((item) => (
           <li key={item._id} className="list-item video-item ">
             <Link to={`/explore/video/${item._id}`}>
-              <img
+              <img loading="lazy" 
                 className="video-thumbnail"
                 src={`/${item.thumbnail}`}
                 alt={item.title}

@@ -20,7 +20,7 @@ export function Navbar() {
         </button>
 
         <Link className="link" to="/">
-          <img
+          <img loading="lazy" 
             className="navbar-brand logo"
             src="/assets/logo.png"
             alt="CakeTube"

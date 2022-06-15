@@ -40,7 +40,7 @@ export function HomePage() {
         </div>
         <img
           className="img-hero"
-          src="assets/hero-image.jpg"
+          src="assets/hero-image.webp"
           alt="celebrations"
         ></img>
       </div>
