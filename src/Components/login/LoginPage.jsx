@@ -131,11 +131,11 @@ export function LoginPage() {
           </button>
         </form>
         <div className="card-footer">
-          <div className="action-button">
+          {/* <div className="action-button">
             <Link to="/" className="btn-link btn-link-basic">
               FORGOT PASSWORD?
             </Link>
-          </div>
+          </div> */}
           <div className="action-icons txt-gray">
             NEW USER?
             <Link

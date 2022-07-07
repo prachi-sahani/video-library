@@ -84,6 +84,16 @@ export function SignupPage() {
       [type]: e.target.value,
     }));
   }
+
+  function fillTestDetails() {
+    setSignupForm({
+      firstName: "Sample",
+      lastName: "User",
+      email: "sample.user@email.com",
+      password: "123456",
+      confirmPassword: "123456",
+    });
+  }
   return (
     <main className="auth-page">
       <div className="card card-basic auth-card">
@@ -104,6 +114,7 @@ export function SignupPage() {
             <input
               className="input-outline"
               type="text"
+              value={signupForm.firstName}
               autoComplete="off"
               name="firstName"
               placeholder="John"
@@ -121,6 +132,7 @@ export function SignupPage() {
               className="input-outline"
               type="text"
               autoComplete="off"
+              value={signupForm.lastName}
               name="lastName"
               placeholder="Doe"
               id="lastName"
@@ -135,6 +147,7 @@ export function SignupPage() {
             </label>
             <input
               className="input-outline w-100"
+              value={signupForm.email}
               type="email"
               autoComplete="off"
               name="emailID"
@@ -151,6 +164,7 @@ export function SignupPage() {
             </label>
             <input
               className="input-outline w-100"
+              value={signupForm.password}
               type={showPassword ? "text" : "password"}
               name="password"
               placeholder="*******"
@@ -174,6 +188,7 @@ export function SignupPage() {
             <input
               className="input-outline w-100"
               type={showConfirmPassword ? "text" : "password"}
+              value={signupForm.confirmPassword}
               name="confirm-password"
               placeholder="*******"
               id="confirm-password"
@@ -203,13 +218,16 @@ export function SignupPage() {
           >
             {!isLoadingSignup ? "Register" : "Loading..."}
           </button>
+          <br/>
+          <button
+            type="button"
+            className="btn-basic btn-outline-primary btn-auth my-3"
+            onClick={fillTestDetails}
+          >
+            Fill Test Details
+          </button>
         </form>
         <div className="card-footer">
-          <div className="action-button">
-            <Link to="/" className="btn-link btn-link-basic">
-              FORGOT PASSWORD?
-            </Link>
-          </div>
           <div className="action-icons">
             ALREADY REGISTERED?
             <Link

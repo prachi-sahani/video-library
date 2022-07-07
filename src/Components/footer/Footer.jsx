@@ -10,9 +10,9 @@ export function Footer() {
           <Link to="/" className="link">
             <li className="list-item">Home</li>
           </Link>
-          <Link to="/" className="link">
+          {/* <Link to="/" className="link">
             <li className="list-item">Terms & Conditions</li>
-          </Link>
+          </Link> */}
         </ul>
         <ul className="footer-contact-links list-group txt-left">
           <h4 className="headings h4">Get in touch</h4>
